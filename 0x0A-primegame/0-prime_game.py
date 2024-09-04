@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-
 def isWinner(x, nums):
     if x <= 0 or not nums or x != len(nums):
         return None
