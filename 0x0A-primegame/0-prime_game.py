@@ -2,37 +2,41 @@
 """0. Prime Game - Maria and Ben are playing a game"""
 
 
-def isWinner(rounds, numbers):
-
-    if rounds <= 0 or numbers is None:
+def isWinner(x, nums):
+    """x - rounds
+    nums - numbers list
+    """
+    if x <= 0 or nums is None:
         return None
-    if rounds != len(numbers):
+    if x != len(nums):
         return None
 
-    ben_score = 0
-    maria_score = 0
+    ben = 0
+    maria = 0
 
-    primes_list = [1 for _ in range(sorted(numbers)[-1] + 1)]
-    primes_list[0], primes_list[1] = 0, 0
-    for index in range(2, len(primes_list)):
-        remove_multiples(primes_list, index)
+    a = [1 for x in range(sorted(nums)[-1] + 1)]
+    a[0], a[1] = 0, 0
+    for i in range(2, len(a)):
+        rm_multiples(a, i)
 
-    for num in numbers:
-        if sum(primes_list[0:num + 1]) % 2 == 0:
-            ben_score += 1
+    for i in nums:
+        if sum(a[0:i + 1]) % 2 == 0:
+            ben += 1
         else:
-            maria_score += 1
-    if ben_score > maria_score:
+            maria += 1
+    if ben > maria:
         return "Ben"
-    if maria_score > ben_score:
+    if maria > ben:
         return "Maria"
     return None
 
 
-def remove_multiples(primes_array, factor):
-
-    for index in range(2, len(primes_array)):
+def rm_multiples(ls, x):
+    """removes multiple
+    of primes
+    """
+    for i in range(2, len(ls)):
         try:
-            primes_array[index * factor] = 0
+            ls[i * x] = 0
         except (ValueError, IndexError):
             break
